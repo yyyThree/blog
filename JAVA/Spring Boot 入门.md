@@ -205,7 +205,7 @@ resources
 
    - 注册拦截器（`Config/InterceptorConfig.java`）
 
-     ```
+	 ```
      @Configuration
      public class InterceptorConfig implements WebMvcConfigurer {
          @Override
@@ -237,59 +237,60 @@ resources
 
     1. 定义路由名称，接收方法
 
-        ```
-    例：@RequestMapping(value = "/get", method = {RequestMethod.GET, RequestMethod.POST})
+    	```
+    	例：@RequestMapping(value = "/get", method = {RequestMethod.GET, RequestMethod.POST})
         
-            可选参数：
+          可选参数：
         
-            value：路由名称
+          value：路由名称
         
-            method：指定请求的method类型， GET、POST、PUT、DELETE、PATCH等,可多选
+          method：指定请求的method类型， GET、POST、PUT、DELETE、PATCH等,可多选
         
-            consumes：指定处理请求的提交内容类型（Content-Type），例如application/json, text/html
+          consumes：指定处理请求的提交内容类型（Content-Type），例如application/json, text/html
         
-            produces： 指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
+          produces： 指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
         
-            params： 指定request中必须包含某些参数值
+          params： 指定request中必须包含某些参数值
         
-            headers： 指定request中必须包含某些指定的header值
-        ```
+          headers： 指定request中必须包含某些指定的header值
+		```
     
     2. 参数接收
     
-            例：@RequestParam(value = "fields", required = false, defaultValue = "*") String fields
-            
-                value：参数名称
-            
-                defaultValue：默认值
-            
-                required：是否是必要参数
+		```
+        例：@RequestParam(value = "fields", required = false, defaultValue = "*") String fields
+
+			value：参数名称
+
+			defaultValue：默认值
+
+			required：是否是必要参数
+      	```
     
     3. 自定义错误路由
     
         1. 在Controller层中添加BaseErrorController.java文件，用于监听路由匹配失败的情况
     
-            ```
-            @Controller
-                public class BaseErrorController implements ErrorController {
-                
-                    @Override
-                    public String getErrorPath() {
-                        System.out.print("错误页面");
-                        return "error/error";
-                    }
-                
-                    @RequestMapping(value = "/error")
-                    public void error() throws Exception {
-                        throw new Exception("路由匹配失败");
-                    }
+			```
+			@Controller
+			public class BaseErrorController implements ErrorController {
+                @Override
+                public String getErrorPath() {
+                    System.out.print("错误页面");
+                    return "error/error";
                 }
-            ```
+
+                @RequestMapping(value = "/error")
+                public void error() throws Exception {
+                    throw new Exception("路由匹配失败");
+                }
+			}
+          ```
     
         2. 在Exception文件夹中添加ControllerHandler.java，用于捕获路由报错并输出。
-    
+        
             ```
-            @RestControllerAdvice
+			@RestControllerAdvice
             public class ControllerHandler {
                 // 缺少必选参数
                 @ExceptionHandler({MissingServletRequestParameterException.class})
@@ -300,37 +301,33 @@ resources
             }
             未解决：抛出异常后访问404页面运行环境会报错，但是页面正常  
             ```
-    
+        
             参考：*https://www.jianshu.com/p/393f70b55b1b*
     
 3. **Service层调用**
-        
-	
+
    1. Service类成员注入
-	   
+   
    	- 使用@Autowired修饰符进行依赖注入
-        
-        	```
-                   @Autowired
-                   private final CardService cardService;
-         ```
-	     
-   	- 用构造函数来做注入类成员（推荐使用）
-        
-        	```
-                  private StoreBalanceCardsRepository cardsRepository;
-                  public CardController(StoreBalanceCardsRepository cardsRepository) {
-                      this.cardsRepository = cardsRepository;
-                  }
-                  **注**：
-                  IntelliJ IDEA使用依赖注入会有IDE报错，但不影响实际编译运行，如需去除报错提示，需要在Dao层（Respository/Mapper）类开头添加注解 `@Repository`
+   		```
+        @Autowired
+        private final CardService cardService;
         ```
-	   
+    
+   	- 用构造函数来做注入类成员（推荐使用）
+        ```
+        private StoreBalanceCardsRepository cardsRepository;
+        public CardController(StoreBalanceCardsRepository cardsRepository) {
+            this.cardsRepository = cardsRepository;
+        }
+        **注**：
+        IntelliJ IDEA使用依赖注入会有IDE报错，但不影响实际编译运行，如需去除报错提示，需要在Dao层（Respository/Mapper）类开头添加注解 `@Repository`
+        ```
+        
    2. 调用
-	   
    	```
-        cardService.get(id, fields);
-      ```
+    	cardService.get(id, fields);
+    ```
 
 ## 七、Service层
 
@@ -345,12 +342,12 @@ resources
    
     ```
     private final StoreBalanceCardsRepository storeBalanceCardsRepository;
-private final StoreBalanceCardsMapper storeBalanceCardsMapper;
-    
-    CardService(StoreBalanceCardsRepository storeBalanceCardsRepository, StoreBalanceCardsMapper storeBalanceCardsMapper) {
-        this.storeBalanceCardsRepository = storeBalanceCardsRepository;
-        this.storeBalanceCardsMapper = storeBalanceCardsMapper;
-    }
+    private final StoreBalanceCardsMapper storeBalanceCardsMapper;
+
+        CardService(StoreBalanceCardsRepository storeBalanceCardsRepository, StoreBalanceCardsMapper storeBalanceCardsMapper) {
+            this.storeBalanceCardsRepository = storeBalanceCardsRepository;
+            this.storeBalanceCardsMapper = storeBalanceCardsMapper;
+        }
     ```
     
 3. **调用Model层文件**

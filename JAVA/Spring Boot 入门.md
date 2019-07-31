@@ -228,8 +228,10 @@ resources
 
 1. **定义控制器文件**
 
-        @RestController
-        在类文件头部定义，标明为控制器文件，且输出格式为JSON
+    ```
+    @RestController
+    在类文件头部定义，标明为控制器文件，且输出格式为JSON
+    ```
 
 2. **路由和参数**
 
@@ -251,7 +253,7 @@ resources
           params： 指定request中必须包含某些参数值
         
           headers： 指定request中必须包含某些指定的header值
-		```
+	```
     
     2. 参数接收
     
@@ -266,7 +268,7 @@ resources
       	```
     
     3. 自定义错误路由
-    
+    	
         1. 在Controller层中添加BaseErrorController.java文件，用于监听路由匹配失败的情况
     
 	    ```
@@ -285,7 +287,7 @@ resources
 	    }
 	    ```
     
-        2. 在Exception文件夹中添加ControllerHandler.java，用于捕获路由报错并输出。
+    	2. 在Exception文件夹中添加ControllerHandler.java，用于捕获路由报错并输出。
         
             ```
 	    @RestControllerAdvice

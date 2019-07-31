@@ -190,7 +190,7 @@ resources
             // 接口日志记录等
             logger.info("afterCompletion...");
         }
-	```
+	 ```
 
     ```
 	**说明**：
@@ -307,27 +307,27 @@ resources
 	
    		- 使用@Autowired修饰符进行依赖注入
    		
-   		```
-       	@Autowired
-   		private final CardService cardService;
-       	```
+            ```
+            @Autowired
+            private final CardService cardService;
+            ```
        	
 		- 用构造函数来做注入类成员（推荐使用）
        	
-		```
-       	private StoreBalanceCardsRepository cardsRepository;
-       	public CardController(StoreBalanceCardsRepository cardsRepository) {
-       		this.cardsRepository = cardsRepository;
-       	}
-       	**注**：
-	    	IntelliJ IDEA使用依赖注入会有IDE报错，但不影响实际编译运行，如需去除报错提示，需要在Dao层（Respository/Mapper）类开头添加注解 `@Repository`
-		```
+            ```
+            private StoreBalanceCardsRepository cardsRepository;
+            public CardController(StoreBalanceCardsRepository cardsRepository) {
+                this.cardsRepository = cardsRepository;
+            }
+            **注**：
+            IntelliJ IDEA使用依赖注入会有IDE报错，但不影响实际编译运行，如需去除报错提示，需要在Dao层（Respository/Mapper）类开头添加注解 `@Repository`
+            ```
        
 	2. 调用
 	
 		```
-	  	cardService.get(id, fields);
-	  	```
+	    cardService.get(id, fields);
+		```
 
 ## 七、Service层
 

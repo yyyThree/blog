@@ -185,8 +185,8 @@ resources
 
 4. **更多**
 
-  `Predicate` 还有匹配请求时间、校验cookie、校验请求参数、校验ip等一系列功能。
-  参考文档：https://cloud.spring.io/spring-cloud-gateway/spring-cloud-gateway.html#gateway-request-predicates-factories
+  ​	`Predicate` 还有匹配请求时间、校验cookie、校验请求参数、校验ip等一系列功能。
+  ​	[参考文档](https://cloud.spring.io/spring-cloud-gateway/spring-cloud-gateway.html#gateway-request-predicates-factories)
 
 ## **六、Filter（过滤器）使用TODO** ##
 ## **七、自定义GatewayFilter** ##

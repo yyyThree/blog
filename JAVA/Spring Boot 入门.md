@@ -3,9 +3,7 @@
 ## 一、开发基础
 
  - Java基础（两到三小时过一遍）
- <br>
  - [Java开发环境配置][1]（**必须使用JDK1.8**）
- <br>
  - IDE安装（优先使用IntelliJ IDEA）
 
 ## 二、名词解释
@@ -30,7 +28,7 @@
     - 可以直接在生成项目的时候选择对应需要安装的插件，如：web、jpa、mybatis等，也可以在项目初始化完成之后在build.gradle中添加/配置
     
 2. **配置build.gradle（位于根目录）**
-
+	
     ```
     plugins {
         id 'org.springframework.boot' version '2.1.3.RELEASE'
@@ -62,8 +60,8 @@
     }
     
     ```
-修改了build.gradle后，idea会自动安装/更新依赖包。
-参考：[gradle官网][2]、[Spring Boot Web服务搭建][3]、[Spring Boot Mysql使用][4]、[Spring Boot JPA使用][5]
+    修改了build.gradle后，idea会自动安装/更新依赖包。
+    参考：[gradle官网][2]、[Spring Boot Web服务搭建][3]、[Spring Boot Mysql使用][4]、[Spring Boot JPA使用][5]
 
 3. **项目基础配置（位于**`src/resources/application.properties`**）**
 
@@ -257,7 +255,7 @@ resources
     
     2. 参数接收
     
-		```
+	```
         例：@RequestParam(value = "fields", required = false, defaultValue = "*") String fields
 
 			value：参数名称
@@ -271,26 +269,26 @@ resources
     
         1. 在Controller层中添加BaseErrorController.java文件，用于监听路由匹配失败的情况
     
-		```
-		@Controller
-		public class BaseErrorController implements ErrorController {
-                	@Override
-                	public String getErrorPath() {
-                    		System.out.print("错误页面");
-                    		return "error/error";
-                	}
+	    ```
+	    @Controller
+	    public class BaseErrorController implements ErrorController {
+               	@Override
+               	public String getErrorPath() {
+              	    System.out.print("错误页面");
+               	    return "error/error";
+                }
 
-                	@RequestMapping(value = "/error")
-                	public void error() throws Exception {
-                    		throw new Exception("路由匹配失败");
-                	}
-		}
-          	```
+                @RequestMapping(value = "/error")
+                public void error() throws Exception {
+                    throw new Exception("路由匹配失败");
+                }
+	    }
+	    ```
     
         2. 在Exception文件夹中添加ControllerHandler.java，用于捕获路由报错并输出。
         
-        	```
-		@RestControllerAdvice
+            ```
+	    @RestControllerAdvice
             public class ControllerHandler {
                 // 缺少必选参数
                 @ExceptionHandler({MissingServletRequestParameterException.class})
@@ -299,8 +297,8 @@ resources
                     return ApiReturn.fail(ExceptionErrorDefines.RequestMissingServletRequest, e.getMessage());
                 }
             }
-            	未解决：抛出异常后访问404页面运行环境会报错，但是页面正常  
-            	```
+            未解决：抛出异常后访问404页面运行环境会报错，但是页面正常  
+            ```
         
             参考：*https://www.jianshu.com/p/393f70b55b1b*
     

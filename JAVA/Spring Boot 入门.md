@@ -62,8 +62,8 @@
     }
     
     ```
-修改了build.gradle后，idea会自动安装/更新依赖包。
-参考：[gradle官网][2]、[Spring Boot Web服务搭建][3]、[Spring Boot Mysql使用][4]、[Spring Boot JPA使用][5]
+    修改了build.gradle后，idea会自动安装/更新依赖包。
+    参考：[gradle官网][2]、[Spring Boot Web服务搭建][3]、[Spring Boot Mysql使用][4]、[Spring Boot JPA使用][5]
 
 3. **项目基础配置（位于**`src/resources/application.properties`**）**
 
@@ -224,7 +224,7 @@ resources
              return new ControllerInterceptor();
          }
      }
-     ```
+    ```
 
 ## 六、Controller层
 
@@ -265,69 +265,71 @@ resources
 			defaultValue：默认值
 
 			required：是否是必要参数
-      	```
+    	```
     
     3. 自定义错误路由
     
         1. 在Controller层中添加BaseErrorController.java文件，用于监听路由匹配失败的情况
-    
+	
 			```
 			@Controller
-			public class BaseErrorController implements ErrorController {
-                @Override
-                public String getErrorPath() {
-                    System.out.print("错误页面");
-                    return "error/error";
-                }
-
-                @RequestMapping(value = "/error")
-                public void error() throws Exception {
-                    throw new Exception("路由匹配失败");
-                }
-			}
-          ```
+    		public class BaseErrorController implements ErrorController {
+    	        @Override
+    	        public String getErrorPath() {
+    	            System.out.print("错误页面");
+    	            return "error/error";
+		    }
+    	
+    	        @RequestMapping(value = "/error")
+    	        public void error() throws Exception {
+    	            throw new Exception("路由匹配失败");
+		        }
+    		}
+			```
     
-        2. 在Exception文件夹中添加ControllerHandler.java，用于捕获路由报错并输出。
-        
-            ```
-			@RestControllerAdvice
-            public class ControllerHandler {
-                // 缺少必选参数
-                @ExceptionHandler({MissingServletRequestParameterException.class})
-                @ResponseBody
-                public ApiResult requestMissingServletRequest(MissingServletRequestParameterException e){
-                    return ApiReturn.fail(ExceptionErrorDefines.RequestMissingServletRequest, e.getMessage());
-                }
-            }
-            未解决：抛出异常后访问404页面运行环境会报错，但是页面正常  
-            ```
-        
-            参考：*https://www.jianshu.com/p/393f70b55b1b*
+		2. 在Exception文件夹中添加ControllerHandler.java，用于捕获路由报错并输出。
+    		``` 
+    		@RestControllerAdvice
+    		public class ControllerHandler {
+    		    // 缺少必选参数
+    		    @ExceptionHandler({MissingServletRequestParameterException.class})
+    		    @ResponseBody
+    		    public ApiResult requestMissingServletRequest(MissingServletRequestParameterException e){
+    		        return ApiReturn.fail(ExceptionErrorDefines.RequestMissingServletRequest, e.getMessage());
+    		    }
+    		}
+    		未解决：抛出异常后访问404页面运行环境会报错，但是页面正常  
+    		```
+    		
+    		参考：*https://www.jianshu.com/p/393f70b55b1b*
     
 3. **Service层调用**
 
-   1. Service类成员注入
-   
-   	- 使用@Autowired修饰符进行依赖注入
+	1. Service类成员注入
+	
+   		- 使用@Autowired修饰符进行依赖注入
+   		
    		```
-        @Autowired
-        private final CardService cardService;
-        ```
-    
-   	- 用构造函数来做注入类成员（推荐使用）
-        ```
-        private StoreBalanceCardsRepository cardsRepository;
-        public CardController(StoreBalanceCardsRepository cardsRepository) {
-            this.cardsRepository = cardsRepository;
-        }
-        **注**：
-        IntelliJ IDEA使用依赖注入会有IDE报错，但不影响实际编译运行，如需去除报错提示，需要在Dao层（Respository/Mapper）类开头添加注解 `@Repository`
-        ```
-        
-   2. 调用
-   	```
-    	cardService.get(id, fields);
-    ```
+       	@Autowired
+   		private final CardService cardService;
+       	```
+       	
+		- 用构造函数来做注入类成员（推荐使用）
+       	
+			```
+       	private StoreBalanceCardsRepository cardsRepository;
+       	public CardController(StoreBalanceCardsRepository cardsRepository) {
+       		this.cardsRepository = cardsRepository;
+       	}
+       	**注**：
+	    	IntelliJ IDEA使用依赖注入会有IDE报错，但不影响实际编译运行，如需去除报错提示，需要在Dao层（Respository/Mapper）类开头添加注解 `@Repository`
+	    	```
+       
+	2. 调用
+	
+	  ```
+	  cardService.get(id, fields);
+	  ```
 
 ## 七、Service层
 

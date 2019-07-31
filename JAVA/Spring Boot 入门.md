@@ -161,8 +161,7 @@ resources
    - 中断链执行的难易程度不同
      拦截器可以 preHandle方法内返回 false 进行中断。
      过滤器就比较复杂，需要处理请求和响应对象来引发中断，需要额外的动作，比如将用户重定向到错误页面。
-     <br>
-
+   
 3. **拦截器的使用**
 
 	- 编写自定义拦截器（`Middleware/ControllerInterceptor.java`）
@@ -190,7 +189,7 @@ resources
             // 接口日志记录等
             logger.info("afterCompletion...");
         }
-	```
+	 ```
 
     ```
 	**说明**：
@@ -453,8 +452,7 @@ resources
       ```
 
     - 在具体的Mapper类上面添加注解 `@Mapper`
-      <br>
-
+    
 4. **Mapper类SQL用例**
 
     ```

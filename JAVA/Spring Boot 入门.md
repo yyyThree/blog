@@ -3,9 +3,7 @@
 ## 一、开发基础
 
  - Java基础（两到三小时过一遍）
- <br>
  - [Java开发环境配置][1]（**必须使用JDK1.8**）
- <br>
  - IDE安装（优先使用IntelliJ IDEA）
 
 ## 二、名词解释
@@ -167,64 +165,64 @@ resources
 
 3. **拦截器的使用**
 
-   - 编写自定义拦截器（`Middleware/ControllerInterceptor.java`）
+	- 编写自定义拦截器（`Middleware/ControllerInterceptor.java`）
 
-     ```
-     public class ControllerInterceptor implements HandlerInterceptor {
-         private Logger logger = LoggerFactory.getLogger(ControllerInterceptor.class);
-         @Override
-         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-             logger.info("preHandle....");
-             // token校验等
-             String token = request.getHeader("token");
-     //      Common.sendJson(response, ApiReturn.fail(1001, "token验证失败"));
-     //      return false;
-             return true;
-         }
-     
-         @Override
-         public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-             logger.info("postHandle...");
-         }
-     
-         @Override
-         public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-             // 接口日志记录等
-             logger.info("afterCompletion...");
-         }
-     ```
-
-     ```
-      **说明**：
-     preHandle：对客户端发过来的请求进行前置处理，如果方法返回true,继续执行后续操作，如果返回false，执行中断请求处理，请求不会发送到Controller。可以在这里校验一些权限信息，如token等,校验失败直接以JSON格式返回请求。
-     
-     postHandler：在请求进行处理后执行，也就是在Controller方法调用之后处理，前提是preHandle方法返回true。具体来说，postHandler方法会在DispatcherServlet进行视图返回渲染前被调用。
-     
-     afterCompletion: 该方法在整个请求结束之后执行，前提依然是preHandle方法的返回值为true。
-     ```
-
-   - 注册拦截器（`Config/InterceptorConfig.java`）
-
-	 ```
-     @Configuration
-     public class InterceptorConfig implements WebMvcConfigurer {
-         @Override
-         // 核心方法
-         public void addInterceptors(InterceptorRegistry registry) {
-             registry.addInterceptor(ControllerInterceptor())
-                     //配置拦截规则
-                     .addPathPatterns("/**")
-                     .order(1);
-     
-             // 多个拦截器按上述方法持续注册即可,同时也可以设置order值，从小到大执行。
-         }
-     
-         @Bean
-         public HandlerInterceptor ControllerInterceptor() {
-             return new ControllerInterceptor();
-         }
-     }
     ```
+    public class ControllerInterceptor implements HandlerInterceptor {
+    	private Logger logger = LoggerFactory.getLogger(ControllerInterceptor.class);
+        @Override
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        	logger.info("preHandle....");
+            // token校验等
+            String token = request.getHeader("token");
+            //     Common.sendJson(response, ApiReturn.fail(1001, "token验证失败"));
+    		//      return false;
+            return true;
+		}
+     
+        @Override
+        public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+            logger.info("postHandle...");
+        }
+     
+        @Override
+        public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+            // 接口日志记录等
+            logger.info("afterCompletion...");
+        }
+	```
+
+    ```
+	**说明**：
+    preHandle：对客户端发过来的请求进行前置处理，如果方法返回true,继续执行后续操作，如果返回false，执行中断请求处理，请求不会发送到Controller。可以在这里校验一些权限信息，如token等,校验失败直接以JSON格式返回请求。
+     
+    postHandler：在请求进行处理后执行，也就是在Controller方法调用之后处理，前提是preHandle方法返回true。具体来说，postHandler方法会在DispatcherServlet进行视图返回渲染前被调用。
+     
+    afterCompletion: 该方法在整个请求结束之后执行，前提依然是preHandle方法的返回值为true。
+    ```
+
+	- 注册拦截器（`Config/InterceptorConfig.java`）
+
+	```
+    @Configuration
+    public class InterceptorConfig implements WebMvcConfigurer {
+        @Override
+        // 核心方法
+        public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(ControllerInterceptor())
+                    //配置拦截规则
+                    .addPathPatterns("/**")
+                    .order(1);
+     
+            // 多个拦截器按上述方法持续注册即可,同时也可以设置order值，从小到大执行。
+        }
+     
+    	@Bean
+        public HandlerInterceptor ControllerInterceptor() {
+            return new ControllerInterceptor();
+        }
+	}
+	```
 
 ## 六、Controller层
 
@@ -316,20 +314,20 @@ resources
        	
 		- 用构造函数来做注入类成员（推荐使用）
        	
-			```
+		```
        	private StoreBalanceCardsRepository cardsRepository;
        	public CardController(StoreBalanceCardsRepository cardsRepository) {
        		this.cardsRepository = cardsRepository;
        	}
        	**注**：
 	    	IntelliJ IDEA使用依赖注入会有IDE报错，但不影响实际编译运行，如需去除报错提示，需要在Dao层（Respository/Mapper）类开头添加注解 `@Repository`
-	    	```
+		```
        
 	2. 调用
 	
-	  ```
-	  cardService.get(id, fields);
-	  ```
+		```
+	  	cardService.get(id, fields);
+	  	```
 
 ## 七、Service层
 

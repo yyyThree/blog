@@ -23,7 +23,7 @@
 * [RabbitMq](RabbitMq/README.md)
     * [RabbitMq账户权限升级](RabbitMq/RabbitMq账户权限升级.md)
     * [RabbitMq nack使用](RabbitMq/RabbitMq nack使用.md)
-    * [RabbitMq 消息总线](RabbitMq/RabbitMq 消息总线)
+    * [RabbitMq 消息总线](RabbitMq/RabbitMq 消息总线.md)
 * [Node](Node/README.md)
     * [使用nvm管理node和npm](Node/使用nvm管理node和npm.md)
     * [使用nrm管理npm的源](Node/使用nrm管理npm的源.md)

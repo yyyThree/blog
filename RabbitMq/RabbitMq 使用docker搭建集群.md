@@ -44,7 +44,7 @@
 
    2. 查看`rabbitMq`管理后台集群数据
 
-      ![rabbitmq管理后台](//img2.ciurl.cn/flashsale/upload/xinfotek_upload/2019/10/29/1572337428567936.png)
+      ![rabbitmq管理后台](https://img2.ciurl.cn/flashsale/upload/xinfotek_upload/2019/10/29/1572337428567936.png)
 
 3. 一键化启动脚本
 

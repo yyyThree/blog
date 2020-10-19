@@ -173,7 +173,7 @@
 
       访问统计页面出现如下界面：
 
-         ![haproxy管理](//img2.ciurl.cn/flashsale/upload/xinfotek_upload/2019/11/01/1572597613365029.png)
+         ![haproxy管理](https://img2.ciurl.cn/flashsale/upload/xinfotek_upload/2019/11/01/1572597613365029.png)
 
 ## 三、集群测试
 

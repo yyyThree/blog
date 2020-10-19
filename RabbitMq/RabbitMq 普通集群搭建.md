@@ -12,7 +12,7 @@
 
 5. 单节点拓扑图如下，集群的拓扑是基于多个Node节点的扩展。
 
-   ![单节点拓扑图](http://img2.ciurl.cn/flashsale/upload/xinfotek_upload/2019/10/24/1571883872293962.png)
+   ![单节点拓扑图](https://img2.ciurl.cn/flashsale/upload/xinfotek_upload/2019/10/24/1571883872293962.png)
 
 ## 二、配置需求
 
